@@ -15,6 +15,8 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    city = models.CharField(max_length=100)  # Add city field
+    travel_date = models.DateField()  # Add travel_date field
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

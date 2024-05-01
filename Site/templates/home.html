@@ -7,10 +7,21 @@
 </head>
 <body>
     <h2>Welcome, {{ username }}!</h2>
-    <p>You are logged in.</p>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
+    <p>You are logged in. <a href="{% url 'logout' %}">Logout</a></p>
+
+    <h3>Recent Posts</h3>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <strong>{{ post.title }}</strong><br>
+                {{ post.content }}<br>
+                <em>City:</em> {{ post.city }}, <em>Travel Date:</em> {{ post.travel_date }}<br>
+                <em>Author:</em> {{ post.author.username }}<br>
+                <em>Posted on:</em> {{ post.created_at }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'create_post' %}">Create Post</a>
 </body>
 </html>

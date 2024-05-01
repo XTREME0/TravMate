@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm, PostForm
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile
+from .models import UserProfile, Post
 
 def signup(request):
     if request.method == 'POST':
@@ -38,8 +38,9 @@ def user_logout(request):
 
 @login_required
 def home(request):
-    username = request.user.username
-    return render(request, 'home.html', {'username': username})
+    # Retrieve all posts ordered by most recent
+    posts = Post.objects.all().order_by('-created_at')
+    return render(request, 'home.html', {'posts': posts})
 
 @login_required
 def create_post(request):

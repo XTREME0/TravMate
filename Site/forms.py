@@ -18,3 +18,6 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'city', 'travel_date']
+        widgets = {
+            'travel_date': forms.DateInput(attrs={'type': 'date'}),
+        }

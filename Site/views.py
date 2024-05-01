@@ -3,6 +3,11 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm, PostForm
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile, Post
+from django.db.models import Q
+
+
+def index(request):
+    return render(request, 'index.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -38,9 +43,26 @@ def user_logout(request):
 
 @login_required
 def home(request):
-    # Retrieve all posts ordered by most recent
+    query = request.GET.get('q')
+    city = request.GET.get('city')
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
     posts = Post.objects.all().order_by('-created_at')
-    return render(request, 'home.html', {'posts': posts})
+
+    if query:
+        posts = posts.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+
+    if city:
+        posts = posts.filter(city__icontains=city)
+
+    if start_date and end_date:
+        posts = posts.filter(travel_date__range=[start_date, end_date])
+    
+    username = request.user.username
+    return render(request, 'home.html', {'posts': posts, 'username': username})
 
 @login_required
 def create_post(request):

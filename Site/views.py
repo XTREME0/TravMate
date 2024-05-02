@@ -7,7 +7,25 @@ from django.db.models import Q
 
 
 def index(request):
-    return render(request, 'index.html')
+    query = request.GET.get('q')
+    city = request.GET.get('city')
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
+    posts = Post.objects.all().order_by('-created_at')
+
+    if query:
+        posts = posts.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+
+    if city:
+        posts = posts.filter(city__icontains=city)
+
+    if start_date and end_date:
+        posts = posts.filter(travel_date__range=[start_date, end_date])
+    
+    return render(request, 'index.html', {'posts': posts})
 
 def signup(request):
     if request.method == 'POST':
@@ -78,7 +96,3 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, 'create_post.html', {'form': form})
-
-@login_required
-def custom_login(request):
-    return redirect('home')

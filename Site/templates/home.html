@@ -4,10 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #007bff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links li:first-child {
+            margin-right: auto; /* Pushes Create Post to the far left */
+        }
+
+        .nav-links li:last-child {
+            margin-right: 0; /* Removes margin from last item */
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logout {
+            color: red;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h3 {
+            margin-top: 30px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        button[type="submit"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        li {
+            flex: 0 0 30%; /* Three items per row */
+            margin-right: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        li:last-child {
+            margin-right: 0;
+        }
+
+        li strong {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        li em {
+            font-style: italic;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        a.button {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            width: 150px;
+            margin: 0 auto;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'create_post' %}" class="button">Create Post</a></li>
+            <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+        </ul>
+    </nav>
+
     <h2>Welcome, {{ username }}!</h2>
-    <p>You are logged in. <a href="{% url 'logout' %}">Logout</a></p>
 
     <h3>Search Posts</h3>
     <form method="get">
@@ -22,15 +143,13 @@
     <ul>
         {% for post in posts %}
             <li>
-                <strong>{{ post.title }}</strong><br>
-                {{ post.content }}<br>
-                <em>City:</em> {{ post.city }}, <em>Travel Date:</em> {{ post.travel_date }}<br>
+                <strong>{{ post.title }}</strong>
                 <em>Author:</em> {{ post.author.username }}<br>
-                <em>Posted on:</em> {{ post.created_at }}
+                <em>Posted on:</em> {{ post.created_at }}<br>
+                <em>City:</em> {{ post.city }}, <em>Travel Date:</em> {{ post.travel_date }}<br>
+                {{ post.content }}
             </li>
         {% endfor %}
     </ul>
-
-    <a href="{% url 'create_post' %}">Create Post</a>
 </body>
 </html>

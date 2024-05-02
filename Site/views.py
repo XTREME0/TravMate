@@ -11,8 +11,10 @@ def index(request):
 
 def signup(request):
     if request.method == 'POST':
+        print("in signuo")
         form = SignUpForm(request.POST)
         if form.is_valid():
+            print("form valid")
             user = form.save(commit=False)
             user.email = form.cleaned_data['email']
             user.save()
@@ -76,3 +78,7 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, 'create_post.html', {'form': form})
+
+@login_required
+def custom_login(request):
+    return redirect('home')

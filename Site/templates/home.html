@@ -10,9 +10,17 @@
             margin: 0;
             padding: 0;
         }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
 
+        header h1 {
+            margin: 0;
+        }
         nav {
-            background-color: #007bff;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -23,6 +31,7 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            max-width: 400px;
             display: flex;
             flex-grow: 1;
         }
@@ -31,9 +40,7 @@
             margin-right: 20px;
         }
 
-        .nav-links li:first-child {
-            margin-right: auto; /* Pushes Create Post to the far left */
-        }
+
 
         .nav-links li:last-child {
             margin-right: 0; /* Removes margin from last item */
@@ -103,30 +110,19 @@
             margin-bottom: 5px;
         }
 
-        a.button {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            width: 150px;
-            margin: 0 auto;
-        }
-
-        a.button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="{% url 'create_post' %}" class="button">Create Post</a></li>
-            <li><a href="{% url 'logout' %}" class="button">Logout</a></li>
-        </ul>
-    </nav>
+    <header>
+        <h1 style="letter-spacing: 0.1em;">TravMate</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'create_post' %}" class="button">Create Post</a></li>
+                <li><a href="{% url 'logout' %}" class="button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
 
     <h2>Welcome, {{ username }}!</h2>
 
@@ -156,5 +152,6 @@
             </li>
         {% endfor %}
     </ul>
+
 </body>
 </html>

@@ -9,14 +9,90 @@
     <!-- Link to your static CSS file for styling -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+<style>
+    header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Example color */
+    color: #fff; /* Example color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Example color */
+}
+
+
+main {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .social-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .social-links li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .social-links li:last-child {
+            margin-right: 0;
+        }
+
+</style>
 <body>
-    <div class="container">
-        <h2>Login</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Login</button>
-        </form>
-    </div>
+    <header>
+        <h1>Welcome to TravMate</h1> <br>
+        <nav>
+            Don't have an account?  
+            <button><a href="{% url 'signup' %}" style="color: white; text-decoration: none;">Create an account</a></button>
+            
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <ul class="social-links">
+            <li><a href="#" style="color: white; text-decoration: none;">Facebook</a></li>
+            <li><a href="#" style="color: white; text-decoration: none;">Twitter</a></li>
+            <li><a href="#" style="color: white; text-decoration: none;">Instagram</a></li>
+        </ul>
+        <p>&copy; 2024 TravMate. All rights reserved.</p>
+    </footer>
 </body>
 </html>

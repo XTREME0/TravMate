@@ -10,6 +10,27 @@
             margin: 0;
             padding: 0;
         }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff; /* Example color */
+            color: #fff; /* Example color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Example color */
+        }
+        header h1 {
+            margin: 0;
+        }
 
         h2 {
             text-align: center;
@@ -54,14 +75,75 @@
         form button[type="submit"]:hover {
             background-color: #0056b3;
         }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .social-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .social-links li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .social-links li:last-child {
+            margin-right: 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <h1 style="letter-spacing: 0.1em;">TravMate</h1> <br>
+        <nav>
+            <ul class="nav-links">
+                <li><button><a href="{% url 'home' %}" class="button">Back To HomePage</a></button></li>
+                <li><button><a href="{% url 'logout' %}" class="button">Logout</a></button></li>
+            </ul>
+        </nav>
+    </header>
     <h2>Create Post</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+    <footer>
+        <ul class="social-links">
+            <li><a href="#" style="color: white; text-decoration: none;">Facebook</a></li>
+            <li><a href="#" style="color: white; text-decoration: none;">Twitter</a></li>
+            <li><a href="#" style="color: white; text-decoration: none;">Instagram</a></li>
+        </ul>
+        <p>&copy; 2024 TravMate. All rights reserved.</p>
+    </footer>
 </body>
 </html>

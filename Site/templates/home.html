@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>TravMate - Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -124,7 +124,7 @@
     <nav>
         <ul class="nav-links">
             <li><a href="{% url 'create_post' %}" class="button">Create Post</a></li>
-            <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+            <li><a href="{% url 'logout' %}" class="button">Logout</a></li>
         </ul>
     </nav>
 
@@ -143,11 +143,16 @@
     <ul>
         {% for post in posts %}
             <li>
-                <strong>{{ post.title }}</strong>
-                <em>Author:</em> {{ post.author.username }}<br>
-                <em>Posted on:</em> {{ post.created_at }}<br>
+                <em>By:</em> {{ post.author.username }}, <em>on: {{ post.created_at }}</em> <br>
+                
                 <em>City:</em> {{ post.city }}, <em>Travel Date:</em> {{ post.travel_date }}<br>
-                {{ post.content }}
+                <br>
+                <strong>{{ post.title }}</strong>
+                
+                <h4>
+                    {{ post.content }}
+                </h4>
+                
             </li>
         {% endfor %}
     </ul>

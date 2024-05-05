@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravMate - Find Travel Groups</title>
+    <title>TravMate - Find Your Travel Mate</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -146,7 +146,7 @@
     <main>
         <section class="hero">
             <h2>Find Your Perfect Travel Group</h2>
-            <form class="search-form" method="get">
+            <form class="search-form" id="searchForm" method="get">
                 <input type="text" name="q" placeholder="Search by title or content">
                 <input type="text" name="city" placeholder="Search by city">
                 <input type="date" name="start_date">
@@ -155,14 +155,15 @@
             </form>
         </section>
 
-        <ul class="results">
+        <ul class="results" id="searchResults" style="display: none;">
             {% for post in posts %}
                 <li class="result">
+                    <p><em>By:</em> {{ post.author.username }}, <em>On:</em> {{ post.created_at }} <br>
+                    <em>City:</em> {{ post.city }}, <em>Travel Date:</em> {{ post.travel_date }}
+                    </p>
+                    
                     <h3>{{ post.title }}</h3>
-                    <p><em>Author:</em> {{ post.author.username }}</p>
-                    <p><em>Posted on:</em> {{ post.created_at }}</p>
-                    <p><em>City:</em> {{ post.city }}, <em>Travel Date:</em> {{ post.travel_date }}</p>
-                    <p>{{ post.content }}</p>
+                    <h4>{{ post.content }}</h4>
                     <a href="#">Read More</a>
                 </li>
             {% endfor %}
@@ -177,5 +178,14 @@
         </ul>
         <p>&copy; 2024 TravMate. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Show the search results
+            document.getElementById('searchResults').style.display = 'block';
+        });
+    </script>
 </body>
 </html>

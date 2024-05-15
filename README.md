@@ -7,8 +7,6 @@ Welcome to TravMate - where wanderlust meets connection! TravMate is your go-to 
 - **Search by City:** Find fellow travelers heading to your desired destination.
 - **Filter by Travel Date:** Narrow down your search based on your preferred travel dates.
 - **Create Travel Posts:** Share your upcoming trips and invite others to join you.
-- **Connect and Chat:** Communicate directly with potential travel buddies through TravMate's messaging system.
-- **User Profiles:** Personalize your profile to showcase your travel interests and preferences.
 
 ## Technologies Used 💻
 
